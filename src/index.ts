@@ -1,3 +1,28 @@
-export const sayHello = function () {
-  return "Hello World";
+import { Plugin } from "vite";
+
+const fileRegex = /\.(md)$/;
+
+function toJS(src, id) {
+  if (!id.endsWith(".md")) {
+    return null;
+  }
+
+  return `
+  const content = \`${src.replace(/`/g, "\\`")}\`;
+  export default content;
+  `;
+}
+
+export function imd(): Plugin {
+  return {
+    name: "vite-plugin-import-md",
+    transform: function (src, id) {
+      if (fileRegex.test(id)) {
+        return {
+          code: toJS(src, id),
+          map: null, // 如果可行将提供 source map
+        };
+      }
+    },
+  };
 }

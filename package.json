@@ -1,8 +1,9 @@
 {
   "name": "vite-plugin-import-md",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Import markdown in vite.",
-  "main": "index.ts",
+  "main": "dist/vite-plugin-import-md.cjs.js",
+  "module": "dist/vite-plugin-import-md.esm.js",
   "scripts": {
     "build": "npx rollup -c rollup.config.js",
     "lint": "npx eslint src/**",
